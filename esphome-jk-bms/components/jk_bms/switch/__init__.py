@@ -23,26 +23,30 @@ SWITCHES = {
 
 JkSwitch = jk_bms_ns.class_("JkSwitch", switch.Switch, cg.Component)
 
+
+def _switch_schema(default_icon):
+    """Return schema compatible with both legacy and new ESPHome APIs."""
+    schema_extension = {cv.Optional(CONF_ICON, default=default_icon): cv.icon}
+    if hasattr(switch, "switch_schema"):
+        return (
+            switch.switch_schema(JkSwitch)
+            .extend(schema_extension)
+            .extend(cv.COMPONENT_SCHEMA)
+        )
+    return (
+        switch.SWITCH_SCHEMA.extend(
+            {
+                cv.GenerateID(): cv.declare_id(JkSwitch),
+                **schema_extension,
+            }
+        ).extend(cv.COMPONENT_SCHEMA)
+    )
+
 CONFIG_SCHEMA = JK_BMS_COMPONENT_SCHEMA.extend(
     {
-        cv.Optional(CONF_CHARGING): switch.SWITCH_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(JkSwitch),
-                cv.Optional(CONF_ICON, default=ICON_CHARGING): cv.icon,
-            }
-        ).extend(cv.COMPONENT_SCHEMA),
-        cv.Optional(CONF_DISCHARGING): switch.SWITCH_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(JkSwitch),
-                cv.Optional(CONF_ICON, default=ICON_DISCHARGING): cv.icon,
-            }
-        ).extend(cv.COMPONENT_SCHEMA),
-        # cv.Optional(CONF_BALANCER): switch.SWITCH_SCHEMA.extend(
-        #     {
-        #         cv.GenerateID(): cv.declare_id(JkSwitch),
-        #         cv.Optional(CONF_ICON, default=ICON_BALANCER): cv.icon,
-        #     }
-        # ).extend(cv.COMPONENT_SCHEMA),
+        cv.Optional(CONF_CHARGING): _switch_schema(ICON_CHARGING),
+        cv.Optional(CONF_DISCHARGING): _switch_schema(ICON_DISCHARGING),
+        # cv.Optional(CONF_BALANCER): _switch_schema(ICON_BALANCER),
     }
 )
 

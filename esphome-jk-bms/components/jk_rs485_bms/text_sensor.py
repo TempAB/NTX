@@ -54,118 +54,44 @@ TEXT_SENSORS = [
     CONF_INFO_DEVICE_SETUP_PASSCODE, 
 ]
 
+
+def _text_sensor_schema(default_icon):
+    """Return schema compatible with both legacy and new ESPHome APIs."""
+    schema_extension = {cv.Optional(CONF_ICON, default=default_icon): cv.icon}
+    if hasattr(text_sensor, "text_sensor_schema"):
+        return text_sensor.text_sensor_schema(text_sensor.TextSensor).extend(
+            schema_extension
+        )
+    return text_sensor.TEXT_SENSOR_SCHEMA.extend(
+        {
+            cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
+            **schema_extension,
+        }
+    )
+
+
 CONFIG_SCHEMA = JK_RS485_BMS_COMPONENT_SCHEMA.extend(
     {
-        cv.Optional(CONF_OPERATION_STATUS): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_OPERATION_MODE): cv.icon,
-            }
+        cv.Optional(CONF_OPERATION_STATUS): _text_sensor_schema(ICON_OPERATION_MODE),
+        cv.Optional(CONF_ERRORS): _text_sensor_schema(ICON_ERRORS),
+        cv.Optional(CONF_BATTERY_TYPE): _text_sensor_schema(ICON_BATTERY_TYPE),
+        cv.Optional(CONF_PASSWORD): _text_sensor_schema(ICON_PASSWORD),
+        cv.Optional(CONF_DEVICE_TYPE): _text_sensor_schema(ICON_EMPTY),
+        cv.Optional(CONF_SOFTWARE_VERSION): _text_sensor_schema(ICON_EMPTY),
+        cv.Optional(CONF_MANUFACTURER): _text_sensor_schema(ICON_EMPTY),
+        cv.Optional(CONF_TOTAL_RUNTIME_FORMATTED): _text_sensor_schema(ICON_TIMELAPSE),
+        cv.Optional(CONF_NETWORK_NODES_AVAILABLE): _text_sensor_schema(ICON_NETWORK),
+        cv.Optional(CONF_INFO_VENDORID): _text_sensor_schema(ICON_INFORMATION),
+        cv.Optional(CONF_INFO_HARDWARE_VERSION): _text_sensor_schema(ICON_INFORMATION),
+        cv.Optional(CONF_INFO_SOFTWARE_VERSION): _text_sensor_schema(ICON_INFORMATION),
+        cv.Optional(CONF_INFO_DEVICE_NAME): _text_sensor_schema(ICON_INFORMATION),
+        cv.Optional(CONF_INFO_DEVICE_PASSWORD): _text_sensor_schema(ICON_INFORMATION),
+        cv.Optional(CONF_INFO_DEVICE_SERIAL_NUMBER): _text_sensor_schema(
+            ICON_INFORMATION
         ),
-        cv.Optional(CONF_ERRORS): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_ERRORS): cv.icon,
-            }
+        cv.Optional(CONF_INFO_DEVICE_SETUP_PASSCODE): _text_sensor_schema(
+            ICON_INFORMATION
         ),
-        cv.Optional(CONF_BATTERY_TYPE): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_BATTERY_TYPE): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_PASSWORD): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_PASSWORD): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_DEVICE_TYPE): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_EMPTY): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_SOFTWARE_VERSION): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_EMPTY): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_MANUFACTURER): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_EMPTY): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_TOTAL_RUNTIME_FORMATTED): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_TIMELAPSE): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_NETWORK_NODES_AVAILABLE): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_NETWORK): cv.icon,
-            }
-        ),    
-        cv.Optional(
-            CONF_INFO_VENDORID
-        ): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_INFORMATION): cv.icon,
-            }
-        ),
-        cv.Optional(
-            CONF_INFO_HARDWARE_VERSION
-        ): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_INFORMATION): cv.icon,
-            }
-        ),
-        cv.Optional(
-            CONF_INFO_SOFTWARE_VERSION
-        ): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_INFORMATION): cv.icon,
-            }
-        ),
-        cv.Optional(
-            CONF_INFO_DEVICE_NAME
-        ): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_INFORMATION): cv.icon,
-            }
-        ),
-        cv.Optional(
-            CONF_INFO_DEVICE_PASSWORD
-        ): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_INFORMATION): cv.icon,
-            }
-        ),   
-        cv.Optional(
-            CONF_INFO_DEVICE_SERIAL_NUMBER
-        ): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_INFORMATION): cv.icon,
-            }
-        ),                    
-        cv.Optional(
-            CONF_INFO_DEVICE_SETUP_PASSCODE
-        ): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_INFORMATION): cv.icon,
-            }
-        ),   
 
         
     }

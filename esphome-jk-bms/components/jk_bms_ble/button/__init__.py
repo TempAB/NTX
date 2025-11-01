@@ -23,20 +23,28 @@ BUTTONS = {
 
 JkButton = jk_bms_ble_ns.class_("JkButton", button.Button, cg.Component)
 
+
+def _button_schema(default_icon):
+    """Return schema compatible with both legacy and new ESPHome APIs."""
+    schema_extension = {cv.Optional(CONF_ICON, default=default_icon): cv.icon}
+    if hasattr(button, "button_schema"):
+        return (
+            button.button_schema(JkButton)
+            .extend(schema_extension)
+            .extend(cv.COMPONENT_SCHEMA)
+        )
+    return (
+        button.BUTTON_SCHEMA.extend(
+            {cv.GenerateID(): cv.declare_id(JkButton), **schema_extension}
+        ).extend(cv.COMPONENT_SCHEMA)
+    )
+
 CONFIG_SCHEMA = JK_BMS_BLE_COMPONENT_SCHEMA.extend(
     {
-        cv.Optional(CONF_RETRIEVE_SETTINGS): button.BUTTON_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(JkButton),
-                cv.Optional(CONF_ICON, default=ICON_RETRIEVE_SETTINGS): cv.icon,
-            }
-        ).extend(cv.COMPONENT_SCHEMA),
-        cv.Optional(CONF_RETRIEVE_DEVICE_INFO): button.BUTTON_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(JkButton),
-                cv.Optional(CONF_ICON, default=ICON_RETRIEVE_DEVICE_INFO): cv.icon,
-            }
-        ).extend(cv.COMPONENT_SCHEMA),
+        cv.Optional(CONF_RETRIEVE_SETTINGS): _button_schema(ICON_RETRIEVE_SETTINGS),
+        cv.Optional(CONF_RETRIEVE_DEVICE_INFO): _button_schema(
+            ICON_RETRIEVE_DEVICE_INFO
+        ),
     }
 )
 

@@ -170,18 +170,26 @@ NUMBERS = {
 
 JkNumber = jk_bms_ble_ns.class_("JkNumber", number.Number, cg.Component)
 
-JK_NUMBER_SCHEMA = number.NUMBER_SCHEMA.extend(
-    {
-        cv.GenerateID(): cv.declare_id(JkNumber),
-        cv.Optional(CONF_ICON, default=ICON_EMPTY): cv.icon,
-        cv.Optional(CONF_STEP, default=0.01): cv.float_,
-        cv.Optional(CONF_UNIT_OF_MEASUREMENT, default=UNIT_VOLT): cv.string_strict,
-        cv.Optional(CONF_MODE, default="BOX"): cv.enum(number.NUMBER_MODES, upper=True),
-        cv.Optional(
-            CONF_ENTITY_CATEGORY, default=ENTITY_CATEGORY_CONFIG
-        ): cv.entity_category,
-    }
-).extend(cv.COMPONENT_SCHEMA)
+_BASE_NUMBER_OPTIONS = {
+    cv.Optional(CONF_ICON, default=ICON_EMPTY): cv.icon,
+    cv.Optional(CONF_STEP, default=0.01): cv.float_,
+    cv.Optional(CONF_UNIT_OF_MEASUREMENT, default=UNIT_VOLT): cv.string_strict,
+    cv.Optional(CONF_MODE, default="BOX"): cv.enum(number.NUMBER_MODES, upper=True),
+    cv.Optional(CONF_ENTITY_CATEGORY, default=ENTITY_CATEGORY_CONFIG): cv.entity_category,
+}
+
+if hasattr(number, "number_schema"):
+    JK_NUMBER_SCHEMA = (
+        number.number_schema(JkNumber)
+        .extend(_BASE_NUMBER_OPTIONS)
+        .extend(cv.COMPONENT_SCHEMA)
+    )
+else:
+    JK_NUMBER_SCHEMA = (
+        number.NUMBER_SCHEMA.extend(
+            {cv.GenerateID(): cv.declare_id(JkNumber), **_BASE_NUMBER_OPTIONS}
+        ).extend(cv.COMPONENT_SCHEMA)
+    )
 
 CONFIG_SCHEMA = JK_BMS_BLE_COMPONENT_SCHEMA.extend(
     {
