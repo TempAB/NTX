@@ -1,2 +1,65 @@
 # macOS Finder metadata
 .DS_Store
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyd
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.pytype/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+
+# Packaging artifacts
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+dist/
+build/
+wheels/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+.python-version
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+*.orig
+*.rej
+
+# Editor and tooling metadata
+.vscode/
+.idea/
+*.code-workspace
+
+# ESPHome / PlatformIO build output
+.esphome/
+.pioenvs/
+.piolibdeps/
+.pio/
+**/build/
+*.bin
+*.elf
+*.map
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Windows artifacts
+Thumbs.db
