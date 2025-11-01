@@ -63,3 +63,7 @@ env.bak/
 
 # Windows artifacts
 Thumbs.db
+
+# Local files
+AGENTS.md
+.codex-notes/
