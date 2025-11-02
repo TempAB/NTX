@@ -26,41 +26,30 @@ TEXT_SENSORS = [
     CONF_BATTERY_TYPE,
 ]
 
+
+def _text_sensor_schema(default_icon):
+    """Return schema compatible with both legacy and new ESPHome APIs."""
+    schema_extension = {cv.Optional(CONF_ICON, default=default_icon): cv.icon}
+    if hasattr(text_sensor, "text_sensor_schema"):
+        return text_sensor.text_sensor_schema(text_sensor.TextSensor).extend(
+            schema_extension
+        )
+    return text_sensor.TEXT_SENSOR_SCHEMA.extend(
+        {
+            cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
+            **schema_extension,
+        }
+    )
+
+
 CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(CONF_HELTEC_BALANCER_BLE_ID): cv.use_id(HeltecBalancerBle),
-        cv.Optional(CONF_ERRORS): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_ERRORS): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_OPERATION_STATUS): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_OPERATION_STATUS): cv.icon,
-            }
-        ),
-        cv.Optional(
-            CONF_TOTAL_RUNTIME_FORMATTED
-        ): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_TIMELAPSE): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_BUZZER_MODE): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_OPERATION_STATUS): cv.icon,
-            }
-        ),
-        cv.Optional(CONF_BATTERY_TYPE): text_sensor.TEXT_SENSOR_SCHEMA.extend(
-            {
-                cv.GenerateID(): cv.declare_id(text_sensor.TextSensor),
-                cv.Optional(CONF_ICON, default=ICON_OPERATION_STATUS): cv.icon,
-            }
-        ),
+        cv.Optional(CONF_ERRORS): _text_sensor_schema(ICON_ERRORS),
+        cv.Optional(CONF_OPERATION_STATUS): _text_sensor_schema(ICON_OPERATION_STATUS),
+        cv.Optional(CONF_TOTAL_RUNTIME_FORMATTED): _text_sensor_schema(ICON_TIMELAPSE),
+        cv.Optional(CONF_BUZZER_MODE): _text_sensor_schema(ICON_OPERATION_STATUS),
+        cv.Optional(CONF_BATTERY_TYPE): _text_sensor_schema(ICON_OPERATION_STATUS),
     }
 )
 

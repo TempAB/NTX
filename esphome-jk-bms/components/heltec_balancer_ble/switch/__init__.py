@@ -25,14 +25,29 @@ HeltecSwitch = heltec_balancer_ble_ns.class_(
     "HeltecSwitch", switch.Switch, cg.Component
 )
 
-CONFIG_SCHEMA = HELTEC_BALANCER_BLE_COMPONENT_SCHEMA.extend(
-    {
-        cv.Optional(CONF_BALANCER): switch.SWITCH_SCHEMA.extend(
+
+def _switch_schema(default_icon):
+    """Return schema compatible with both legacy and new ESPHome APIs."""
+    schema_extension = {cv.Optional(CONF_ICON, default=default_icon): cv.icon}
+    if hasattr(switch, "switch_schema"):
+        return (
+            switch.switch_schema(HeltecSwitch)
+            .extend(schema_extension)
+            .extend(cv.COMPONENT_SCHEMA)
+        )
+    return (
+        switch.SWITCH_SCHEMA.extend(
             {
                 cv.GenerateID(): cv.declare_id(HeltecSwitch),
-                cv.Optional(CONF_ICON, default=ICON_BALANCER): cv.icon,
+                **schema_extension,
             }
-        ).extend(cv.COMPONENT_SCHEMA),
+        ).extend(cv.COMPONENT_SCHEMA)
+    )
+
+
+CONFIG_SCHEMA = HELTEC_BALANCER_BLE_COMPONENT_SCHEMA.extend(
+    {
+        cv.Optional(CONF_BALANCER): _switch_schema(ICON_BALANCER),
     }
 )
 
