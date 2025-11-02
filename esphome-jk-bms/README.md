@@ -8,6 +8,8 @@
 
 ESPHome components to monitor Jikong Battery Management Systems (JK-BMS) via UART-TTL, BLE, and RS-485.
 
+> **NTX fork note:** This repository exposes the ESPHome components at the top-level `components/` directory so Home Assistant can load them via `external_components` using `github://TempAB/NTX@main`.
+
 ## Via RS-485 - GOOD for monitoring and control SWITCHES and NUMBERS (the ESP acts as MASTER)
 
 **NEW:** monitor your new JK-PBx BMSs via internal RS485 network using 1 only ESP. [Click here](https://github.com/txubelaxu/esphome-jk-bms/blob/main/components/jk_rs485_bms/README.md) for more info. Home Assistant dashboards inside as well.

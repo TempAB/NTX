@@ -101,6 +101,13 @@ external_components:
   - source: github://syssi/esphome-jk-bms@main
 ```
 
+When consuming the NTX fork, point ESPHome at the root-level `components/` directory we expose via GitHub:
+
+```yaml
+external_components:
+  - source: github://TempAB/NTX@main
+```
+
 or just use the `esp32-example.yaml` as proof of concept:
 
 ```bash
