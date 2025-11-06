@@ -197,6 +197,10 @@ NUMBERS = {
     CONF_CELL_REQUEST_CHARGE_VOLTAGE_TIME:                  [0x0104, 0x15,   0x02,  1,  0],
     CONF_CELL_REQUEST_FLOAT_VOLTAGE_TIME:                   [0x0104, 0x15,   0x02,  1,  0],
 
+    CONF_VOLTAGE_CALIBRATION:                               [0x0000, 0x16,   0x04,  1,  0],
+    CONF_CURRENT_CALIBRATION:                               [0x0006, 0x16,   0x04,  1,  0],
+
+
 
     #0x0104
     #02.10.15.04.00.01.02.00.01.36.25
@@ -582,7 +586,7 @@ CONFIG_SCHEMA = JK_RS485_BMS_COMPONENT_SCHEMA.extend(
             {
                 # @FIXME The exact limits are unknown
                 cv.Optional(CONF_MIN_VALUE, default=10.0): cv.float_,
-                cv.Optional(CONF_MAX_VALUE, default=100.0): cv.float_,
+                cv.Optional(CONF_MAX_VALUE, default=60.0): cv.float_,
                 cv.Optional(CONF_STEP, default=0.01): cv.float_,
             }
         ),
