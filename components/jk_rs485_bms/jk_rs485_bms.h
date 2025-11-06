@@ -590,6 +590,8 @@ class JkRS485Bms : public PollingComponent, public jk_rs485_sniffer::JkRS485Snif
   void set_mos_overtemperature_protection_number(JkRS485BmsNumber *mos_overtemperature_protection_number);
   void set_mos_overtemperature_protection_recovery_number(JkRS485BmsNumber *mos_overtemperature_protection_recovery_number);
 
+  void set_voltage_calibration_number(JkRS485BmsNumber *voltage_calibration_number);
+  void set_current_calibration_number(JkRS485BmsNumber *current_calibration_number);
   void set_cell_count_settings_number(JkRS485BmsNumber *cell_count_settings_number);
   void set_battery_capacity_total_settings_number(JkRS485BmsNumber *battery_capacity_total_settings_number);
   void set_precharging_time_from_discharge_number(JkRS485BmsNumber *precharging_time_from_discharge_number);
@@ -968,6 +970,8 @@ class JkRS485Bms : public PollingComponent, public jk_rs485_sniffer::JkRS485Snif
     JkRS485BmsNumber *cell_soc0_voltage_number_; 
     JkRS485BmsNumber *cell_request_charge_voltage_number_; 
     JkRS485BmsNumber *cell_request_float_voltage_number_; 
+    JkRS485BmsNumber *voltage_calibration_number_;
+    JkRS485BmsNumber *current_calibration_number_;
     JkRS485BmsNumber *cell_power_off_voltage_number_;
     JkRS485BmsNumber *cell_balancing_starting_voltage_number_;
     JkRS485BmsNumber *max_charging_current_number_;    

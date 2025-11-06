@@ -230,6 +230,8 @@ void JkRS485Bms::JkRS485Bms_init(void) {
     this->cell_soc0_voltage_number_ = new JkRS485BmsNumber();  
     this->cell_request_charge_voltage_number_ = new JkRS485BmsNumber();   
     this->cell_request_float_voltage_number_ = new JkRS485BmsNumber();  
+    this->voltage_calibration_number_ = new JkRS485BmsNumber();
+    this->current_calibration_number_ = new JkRS485BmsNumber();
     this->cell_power_off_voltage_number_ = new JkRS485BmsNumber();  
     this->cell_balancing_starting_voltage_number_ = new JkRS485BmsNumber(); 
     this->max_charging_current_number_ = new JkRS485BmsNumber();  
@@ -298,6 +300,8 @@ void JkRS485Bms::set_cell_soc100_voltage_number(JkRS485BmsNumber *cell_soc100_vo
 void JkRS485Bms::set_cell_soc0_voltage_number(JkRS485BmsNumber *cell_soc0_voltage_number)   { this->cell_soc0_voltage_number_ = cell_soc0_voltage_number; }
 void JkRS485Bms::set_cell_request_charge_voltage_number(JkRS485BmsNumber *cell_request_charge_voltage_number)   { this->cell_request_charge_voltage_number_ = cell_request_charge_voltage_number; }
 void JkRS485Bms::set_cell_request_float_voltage_number(JkRS485BmsNumber *cell_request_float_voltage_number)   { this->cell_request_float_voltage_number_ = cell_request_float_voltage_number; }
+void JkRS485Bms::set_voltage_calibration_number(JkRS485BmsNumber *voltage_calibration_number)   { this->voltage_calibration_number_ = voltage_calibration_number; }
+void JkRS485Bms::set_current_calibration_number(JkRS485BmsNumber *current_calibration_number)   { this->current_calibration_number_ = current_calibration_number; }
 void JkRS485Bms::set_cell_power_off_voltage_number(JkRS485BmsNumber *cell_power_off_voltage_number)   { this->cell_power_off_voltage_number_ = cell_power_off_voltage_number; }
 void JkRS485Bms::set_cell_balancing_starting_voltage_number(JkRS485BmsNumber *cell_balancing_starting_voltage_number)   { this->cell_balancing_starting_voltage_number_ = cell_balancing_starting_voltage_number; }
 void JkRS485Bms::set_max_charging_current_number(JkRS485BmsNumber *max_charging_current_number)   { this->max_charging_current_number_ = max_charging_current_number; }
@@ -1611,6 +1615,8 @@ void JkRS485Bms::publish_device_unavailable_() {
   this->publish_state_(cell_balancing_trigger_voltage_number_, NAN);
   this->publish_state_(cell_request_charge_voltage_number_, NAN);
   this->publish_state_(cell_request_float_voltage_number_, NAN);
+  this->publish_state_(voltage_calibration_number_, NAN);
+  this->publish_state_(current_calibration_number_, NAN);
   this->publish_state_(cell_power_off_voltage_number_, NAN);
   this->publish_state_(cell_balancing_starting_voltage_number_, NAN);  
   this->publish_state_(max_charging_current_number_, NAN);
