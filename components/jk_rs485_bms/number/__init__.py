@@ -197,8 +197,8 @@ NUMBERS = {
     CONF_CELL_REQUEST_CHARGE_VOLTAGE_TIME:                  [0x0104, 0x15,   0x02,  1,  0],
     CONF_CELL_REQUEST_FLOAT_VOLTAGE_TIME:                   [0x0104, 0x15,   0x02,  1,  0],
 
-    CONF_VOLTAGE_CALIBRATION:                               [0x0000, 0x16,   0x04,  1,  0],
-    CONF_CURRENT_CALIBRATION:                               [0x0006, 0x16,   0x04,  1,  0],
+    CONF_VOLTAGE_CALIBRATION:                               [0x0000, 0x15,   0x04,  1,  0],
+    CONF_CURRENT_CALIBRATION:                               [0x0006, 0x15,   0x04,  1,  0],
 
 
 
