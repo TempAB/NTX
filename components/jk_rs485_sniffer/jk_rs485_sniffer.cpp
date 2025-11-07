@@ -207,7 +207,7 @@ void JkRS485Sniffer::send_command_switch_or_number_to_slave_uint32(std::uint8_t 
   frame[0]  = slave_address ;                   // Slave Address
   frame[1]  = 0x10;                             // 
   frame[2]  = third_element_of_frame;           // 
-  frame[3]  = (register_address & 0x00FF) >> 0;                 // Register address
+  frame[3]  = (register_address & 0x00FF) >> 0;        // Register address (low byte), explicit AND
   frame[4]  = 0x00;                             // 
   frame[5]  = 0x02;                             // 
   frame[6]  = 4;                                // Length of data in number of Bytes
@@ -247,7 +247,8 @@ void JkRS485Sniffer::send_command_switch_or_number_to_slave_uint16(std::uint8_t 
   frame[0]  = slave_address ;                   // Slave Address
   frame[1]  = 0x10;                             // 
   frame[2]  = third_element_of_frame;                      // 
-  frame[3]  = register_address;                 // Register address
+//  frame[3]  = register_address;                 // Register address
+  frame[3]  = (register_address & 0x00FF) >> 0;        // Register address (low byte), explicit AND
   frame[4]  = 0x00;                             // 
   frame[5]  = 0x01;                             // 
   frame[6]  = 2;                                // Length of data in number of Bytes
@@ -284,7 +285,8 @@ void JkRS485Sniffer::send_command_switch_or_number_to_slave_int32(std::uint8_t s
   frame[0]  = slave_address ;                   // Slave Address
   frame[1]  = 0x10;                             // 
   frame[2]  = third_element_of_frame;           // 
-  frame[3]  = register_address;                 // Register address
+ // frame[3]  = register_address;                 // Register address
+  frame[3]  = (register_address & 0x00FF) >> 0;        // Register address (low byte), explicit AND
   frame[4]  = 0x00;                             // 
   frame[5]  = 0x02;                             // 
   frame[6]  = 4;                                // Length of data in number of Bytes
