@@ -2014,8 +2014,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms0
-    precharging:
-      name: "${bms0_name} precharging"
     charging:
       name: "${bms0_name} charging"
     discharging:
@@ -2048,8 +2046,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms1
-    precharging:
-      name: "${bms1_name} precharging"
     charging:
       name: "${bms1_name} charging"
     discharging:
@@ -2082,8 +2078,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms2
-    precharging:
-      name: "${bms2_name} precharging"
     charging:
       name: "${bms2_name} charging"
     discharging:
@@ -2115,8 +2109,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms3
-    precharging:
-      name: "${bms3_name} precharging"
     charging:
       name: "${bms3_name} charging"
     discharging:
@@ -2148,8 +2140,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms4
-    precharging:
-      name: "${bms4_name} precharging"
     charging:
       name: "${bms4_name} charging"
     discharging:
@@ -2181,8 +2171,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms5
-    precharging:
-      name: "${bms5_name} precharging"
     charging:
       name: "${bms5_name} charging"
     discharging:
@@ -2214,8 +2202,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms6
-    precharging:
-      name: "${bms6_name} precharging"
     charging:
       name: "${bms6_name} charging"
     discharging:
@@ -2946,4 +2932,3 @@ number:
       name: "${bms6_name} cell request charge voltage time"       
     cell_request_float_voltage_time:
       name: "${bms6_name} cell request float voltage time"       
-

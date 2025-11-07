@@ -8,7 +8,6 @@ CONF_STATUS_HEATING = "status_heating"
 
 
 CONF_BALANCING = "balancing"
-CONF_PRECHARGING = "precharging"
 CONF_CHARGING = "charging"
 CONF_DISCHARGING = "discharging"
 CONF_HEATING = "heating"

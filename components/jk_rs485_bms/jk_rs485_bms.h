@@ -109,10 +109,6 @@ class JkRS485Bms : public PollingComponent, public jk_rs485_sniffer::JkRS485Snif
   //void set_precharging_binary_sensor(binary_sensor::BinarySensor *precharging_binary_sensor) {
   //  precharging_binary_sensor_ = precharging_binary_sensor;
   //}
-  void set_precharging_switch_binary_sensor(binary_sensor::BinarySensor *precharging_switch_binary_sensor) {
-    precharging_switch_binary_sensor_ = precharging_switch_binary_sensor;
-  }  
-  
   //void set_discharging_binary_sensor(binary_sensor::BinarySensor *discharging_binary_sensor) {
   //  discharging_binary_sensor_ = discharging_binary_sensor;
   //}
@@ -544,7 +540,6 @@ class JkRS485Bms : public PollingComponent, public jk_rs485_sniffer::JkRS485Snif
 
   void set_disable_pcl_module_switch(JkRS485BmsSwitch *disable_pcl_module_switch);
 
-  void set_precharging_switch(JkRS485BmsSwitch *precharging_switch);
   void set_charging_switch(JkRS485BmsSwitch *charging_switch);
   void set_discharging_switch(JkRS485BmsSwitch *discharging_switch);
   void set_balancing_switch(JkRS485BmsSwitch *balancer_switch);
@@ -775,7 +770,6 @@ class JkRS485Bms : public PollingComponent, public jk_rs485_sniffer::JkRS485Snif
   }
 
   private:
-    JkRS485BmsSwitch *precharging_switch_;
     JkRS485BmsSwitch *charging_switch_;
     JkRS485BmsSwitch *discharging_switch_;
     JkRS485BmsSwitch *balancer_switch_;
@@ -809,7 +803,6 @@ class JkRS485Bms : public PollingComponent, public jk_rs485_sniffer::JkRS485Snif
     text_sensor::TextSensor *info_device_setup_passcode_text_sensor_;
 
     binary_sensor::BinarySensor *balancing_switch_binary_sensor_;
-    binary_sensor::BinarySensor *precharging_switch_binary_sensor_;
     binary_sensor::BinarySensor *charging_switch_binary_sensor_;
     binary_sensor::BinarySensor *discharging_switch_binary_sensor_;
     binary_sensor::BinarySensor *dedicated_charger_switch_binary_sensor_;

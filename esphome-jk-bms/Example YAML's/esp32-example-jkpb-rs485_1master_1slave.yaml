@@ -677,8 +677,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms0
-    precharging:
-      name: "${bms0_name} precharging"
     charging:
       name: "${bms0_name} charging"
     discharging:
@@ -711,8 +709,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms1
-    precharging:
-      name: "${bms1_name} precharging"
     charging:
       name: "${bms1_name} charging"
     discharging:
@@ -950,4 +946,3 @@ number:
       name: "${bms1_name} cell request charge voltage time"       
     cell_request_float_voltage_time:
       name: "${bms1_name} cell request float voltage time"       
-

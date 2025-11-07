@@ -62,7 +62,6 @@ namespace jk_rs485_bms {
 
 
 void JkRS485Bms::JkRS485Bms_init(void) {
-    this->precharging_switch_ = new JkRS485BmsSwitch(false);
     this->charging_switch_ = new JkRS485BmsSwitch(false);
     this->discharging_switch_ = new JkRS485BmsSwitch(false);
     this->balancer_switch_ = new JkRS485BmsSwitch(false);
@@ -96,7 +95,6 @@ void JkRS485Bms::JkRS485Bms_init(void) {
     this->info_device_setup_passcode_text_sensor_ = new text_sensor::TextSensor();
 
     this->balancing_switch_binary_sensor_= new binary_sensor::BinarySensor();
-    this->precharging_switch_binary_sensor_= new binary_sensor::BinarySensor();
     this->charging_switch_binary_sensor_= new binary_sensor::BinarySensor();
     this->discharging_switch_binary_sensor_= new binary_sensor::BinarySensor();
     this->dedicated_charger_switch_binary_sensor_= new binary_sensor::BinarySensor();
@@ -275,7 +273,6 @@ void JkRS485Bms::JkRS485Bms_init(void) {
 
 
 void JkRS485Bms::set_disable_pcl_module_switch(JkRS485BmsSwitch *disable_pcl_module_switch) {this->disable_pcl_module_switch_ = disable_pcl_module_switch;}
-void JkRS485Bms::set_precharging_switch(JkRS485BmsSwitch *precharging_switch) { this->precharging_switch_ = precharging_switch; }
 void JkRS485Bms::set_charging_switch(JkRS485BmsSwitch *charging_switch) { this->charging_switch_ = charging_switch; }
 void JkRS485Bms::set_discharging_switch(JkRS485BmsSwitch *discharging_switch) { this->discharging_switch_ = discharging_switch; }
 void JkRS485Bms::set_balancing_switch(JkRS485BmsSwitch *balancer_switch) { this->balancer_switch_ = balancer_switch; }

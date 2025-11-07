@@ -706,8 +706,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms0
-    precharging:
-      name: "${bms0_name} precharging"
     charging:
       name: "${bms0_name} charging"
     discharging:
@@ -740,8 +738,6 @@ switch:
 
   - platform: jk_rs485_bms
     jk_rs485_bms_id: bms1
-    precharging:
-      name: "${bms1_name} precharging"
     charging:
       name: "${bms1_name} charging"
     discharging:
